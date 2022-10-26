@@ -1638,8 +1638,8 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		return true;
      //CodeChange by Jyothi
 	//std::system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
-	//std::system("ls -l >test.txt"); // execute the UNIX command "ls -l >test.txt"
-    //std::cout << std::ifstream("test.txt").rdbuf();
+	std::system("ls -l >test.txt"); // execute the UNIX command "ls -l >test.txt"
+    std::cout << std::ifstream("test.txt").rdbuf();
 
 	// fuse all depth-maps
 	pointcloud.Release();
