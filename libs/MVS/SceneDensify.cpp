@@ -36,6 +36,8 @@
 // MRF: view selection
 #include "../Math/TRWS/MRFEnergy.h"
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
 using namespace MVS;
 
 
@@ -1634,9 +1636,10 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		return false;
 	if (ABS(nFusionMode) == 1)
 		return true;
-
-	std::system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
-
+     //CodeChange by Jyothi
+	//std::system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
+	//std::system("ls -l >test.txt"); // execute the UNIX command "ls -l >test.txt"
+    //std::cout << std::ifstream("test.txt").rdbuf();
 
 	// fuse all depth-maps
 	pointcloud.Release();
