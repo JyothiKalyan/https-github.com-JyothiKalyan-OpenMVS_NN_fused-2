@@ -1634,8 +1634,8 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		return false;
 	if (ABS(nFusionMode) == 1)
 		return true;
-		
-	system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
+
+	//system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
 
 
 	// fuse all depth-maps
