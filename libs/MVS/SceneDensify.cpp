@@ -1637,10 +1637,11 @@ bool Scene::DenseReconstruction(int nFusionMode)
 	if (ABS(nFusionMode) == 1)
 		return true;
      //CodeChange by Jyothi
-	//std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'")
+	std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
 	std::system("ls -l >test.txt"); // execute the UNIX command "ls -l >test.txt"
-	std::cout <<  "************\n*****************\n***********\n//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'************\n*****************\n***********\n************\n*****************\n***********\n"
-    std::cout << std::ifstream("test.txt").rdbuf();
+	std::cout <<  "************\n***************\n***********\n//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'************\n*****************\n***********\n************\n*****************\n***********\n";
+    std:cout<<"************************\n***************************\n************************\n***************************\n";
+	std::cout << std::ifstream("test.txt").rdbuf();
 
 	// fuse all depth-maps
 	pointcloud.Release();
