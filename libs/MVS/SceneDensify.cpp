@@ -35,7 +35,7 @@
 #include "PatchMatchCUDA.h"
 // MRF: view selection
 #include "../Math/TRWS/MRFEnergy.h"
-
+#include <cstdlib>
 using namespace MVS;
 
 
@@ -1635,7 +1635,7 @@ bool Scene::DenseReconstruction(int nFusionMode)
 	if (ABS(nFusionMode) == 1)
 		return true;
 
-	//system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
+	//std::system('//datasets//project//readdmapfile_final "//datasets//project//opensfm//undistorted//openmvs//depthmaps"  "//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv"')
 
 
 	// fuse all depth-maps
