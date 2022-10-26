@@ -1638,11 +1638,9 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		return true;
      //CodeChange by Jyothi
 	std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
-	std::system("ls -l >test.txt"); // execute the UNIX command "ls -l >test.txt"
-	std::cout <<  "************\n***************\n***********\n//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'************\n*****************\n***********\n************\n*****************\n***********\n";
-    std::cout<<"************************\n***************************\n************************\n***************************\n";
-	std::cout << std::ifstream("test.txt").rdbuf();
-
+	std::system("python3 //datasets//project//fuseAIDepth.py")
+	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
+	
 	// fuse all depth-maps
 	pointcloud.Release();
 	if (OPTDENSE::nMinViewsFuse < 2) {
