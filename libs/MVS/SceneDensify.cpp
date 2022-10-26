@@ -1638,7 +1638,7 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		return true;
      //CodeChange by Jyothi
 	std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
-	std::system("python3 //datasets//project//fuseAIDepth.py")
+	std::system("python3 //datasets//project//fuseAIDepth.py");
 	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
 	
 	// fuse all depth-maps
