@@ -1422,6 +1422,7 @@ void DepthMapsData::FuseDepthMaps(PointCloud& pointcloud, bool bEstimateColor, b
 		pointcloud.colors.Reserve(nPointsEstimate);
 	if (bEstimateNormal)
 		pointcloud.normals.Reserve(nPointsEstimate);
+	std::cout<<"********************Line 1425********************\n";
 	Util::Progress progress(_T("Fused depth-maps"), connections.GetSize());
 	GET_LOGCONSOLE().Pause();
 	FOREACHPTR(pConnection, connections) {
@@ -1646,6 +1647,8 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		// fuse depth-maps
 		data.depthMaps.FuseDepthMaps(pointcloud, OPTDENSE::nEstimateColors == 2, OPTDENSE::nEstimateNormals == 2);
 	}
+
+	
 	#if TD_VERBOSE != TD_VERBOSE_OFF
 	if (g_nVerbosityLevel > 2) {
 		// print number of points with 3+ views
@@ -1837,10 +1840,10 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 		return false;
 	data.progress.Release();
    //CodeChange by Jyothi
-	std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
-	std::system("python3 //datasets//project//fuseAIDepth.py");
-	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
-	std::cout<<"all changed code execution done";
+	//std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
+	//std::system("python3 //datasets//project//fuseAIDepth.py");
+	//std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
+	//std::cout<<"all changed code execution done";
 	if (data.nFusionMode >= 0) {
 		#ifdef _USE_CUDA
 		// initialize CUDA
@@ -2051,7 +2054,7 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			data.progress->operator++();
 			break; }
 
-		case EVT_CLOSE: {
+		case EDenseReconstructionVT_CLOSE: {
 			return; }
 
 		default:
