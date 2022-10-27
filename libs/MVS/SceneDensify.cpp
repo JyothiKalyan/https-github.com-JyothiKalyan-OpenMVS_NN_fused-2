@@ -1636,11 +1636,7 @@ bool Scene::DenseReconstruction(int nFusionMode)
 		return false;
 	if (ABS(nFusionMode) == 1)
 		return true;
-     //CodeChange by Jyothi
-	std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
-	std::system("python3 //datasets//project//fuseAIDepth.py");
-	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
-	
+  
 	// fuse all depth-maps
 	pointcloud.Release();
 	if (OPTDENSE::nMinViewsFuse < 2) {
@@ -1824,6 +1820,11 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	// start working threads
 	data.progress = new Util::Progress("Estimated depth-maps", data.images.GetSize());
 	GET_LOGCONSOLE().Pause();
+	   //CodeChange by Jyothi
+	std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
+	std::system("python3 //datasets//project//fuseAIDepth.py");
+	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
+	
 	if (nMaxThreads > 1) {
 		// multi-thread execution
 		cList<SEACAVE::Thread> threads(2);
