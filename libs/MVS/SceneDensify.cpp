@@ -1422,7 +1422,6 @@ void DepthMapsData::FuseDepthMaps(PointCloud& pointcloud, bool bEstimateColor, b
 		pointcloud.colors.Reserve(nPointsEstimate);
 	if (bEstimateNormal)
 		pointcloud.normals.Reserve(nPointsEstimate);
-	std::cout<<"********************Line 1425********************\n";
 	Util::Progress progress(_T("Fused depth-maps"), connections.GetSize());
 	GET_LOGCONSOLE().Pause();
 	FOREACHPTR(pConnection, connections) {
@@ -2054,7 +2053,7 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			data.progress->operator++();
 			break; }
 
-		case EDenseReconstructionVT_CLOSE: {
+		case EVT_CLOSE: {
 			return; }
 
 		default:
