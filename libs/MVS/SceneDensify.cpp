@@ -1285,7 +1285,7 @@ bool DepthMapsData::FilterDepthMap(DepthData& depthDataRef, const IIndexArr& idx
 			}
 		}
 	}
-	std::cout<<"***************** "<<imageRef.GetID()<<"*********\n";
+	std::cout<<"*******@@@@@@@@@@@@@@@@@@@@@   ********** "<<imageRef.GetID()<<"**** @@@@@@@@@@@@@@@@@ *****\n";
 
 	if (!SaveDepthMap(ComposeDepthFilePath(imageRef.GetID(), "filtered.dmap"), newDepthMap) ||
 		!SaveConfidenceMap(ComposeDepthFilePath(imageRef.GetID(), "filtered.cmap"), newConfMap))
@@ -1887,15 +1887,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 		}
 		data.nEstimationGeometricIter = -1;
 	}
-	std::cout<<"***********************  Change started  *****************\n";
-	 //CodeChange by Jyothi
-	/*std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
-	std::cout<<"*************************one************************\n";
-	std::system("python3 //datasets//project//fuseAIDepth.py");
-	std::cout<<"*************************two************************\n";
-	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
-	*/
-std::cout<<"all changed code execution done";
+	
 
 	if ((OPTDENSE::nOptimize & OPTDENSE::ADJUST_FILTER) != 0) {
 		// initialize the queue of depth-maps to be filtered
@@ -1916,6 +1908,7 @@ std::cout<<"all changed code execution done";
 				pThread->join();
 		} else {
 			// single-thread execution
+			std::cout<<"Single Thread execution";
 			DenseReconstructionFilter((void*)&data);
 		}
 		GET_LOGCONSOLE().Play();
@@ -1923,6 +1916,28 @@ std::cout<<"all changed code execution done";
 			return false;
 		data.progress.Release();
 	}
+	//data.
+	//const IIndex idx = data.images[evtImage.idxImage];
+	
+	//data.depthMaps.arrDepthData[idx].depthmap
+	//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
+	for (IIndex idx: data.images) {
+		std::cout<<"started0.\n";
+				const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
+				std::cout<<"started1.\n";
+				depthData.depthmap = 0;
+				std::cout<<"changed\n";
+	}
+	std::cout<<"***********************  Change started  *****************\n";
+	 //CodeChange by Jyothi
+	/*std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
+	std::cout<<"*************************one************************\n";
+	std::system("python3 //datasets//project//fuseAIDepth.py");
+	std::cout<<"*************************two************************\n";
+	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
+	*/
+std::cout<<"all changed code execution done";
+
 	return true;
 } // ComputeDepthMaps
 /*----------------------------------------------------------------*/
@@ -1979,7 +1994,8 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			break; }
 
 		case EVT_ESTIMATEDEPTHMAP: {
-			std::cout<<"*************************  EVT_ESTIMATEDEPTHMAP   EVT_ESTIMATEDEPTHMAP EVT_ESTIMATEDEPTHMAP************************\n";
+			//std::cout<<"*************************  EVT_ESTIMATEDEPTHMAP   EVT_ESTIMATEDEPTHMAP EVT_ESTIMATEDEPTHMAP************************\n";
+			//Not running
 			const EVTEstimateDepthMap& evtImage = *((EVTEstimateDepthMap*)(Event*)evt);
 			// request next image initialization to be performed while computing this depth-map
 			data.events.AddEvent(new EVTProcessImage((uint32_t)Thread::safeInc(data.idxImage)));
@@ -2013,8 +2029,8 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			break; }
 
 		case EVT_OPTIMIZEDEPTHMAP: {
-			std::cout<<"*************************  EVT_OPTIMIZEDEPTHMAP   EVT_OPTIMIZEDEPTHMAP EVT_OPTIMIZEDEPTHMAP************************\n";
-			
+			//std::cout<<"*************************  EVT_OPTIMIZEDEPTHMAP   EVT_OPTIMIZEDEPTHMAP EVT_OPTIMIZEDEPTHMAP************************\n";
+			//Executed 1st step
 			const EVTOptimizeDepthMap& evtImage = *((EVTOptimizeDepthMap*)(Event*)evt);
 			const IIndex idx = data.images[evtImage.idxImage];
 			DepthData& depthData(data.depthMaps.arrDepthData[idx]);
@@ -2041,8 +2057,8 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			break; }
 
 		case EVT_SAVEDEPTHMAP: {
-			std::cout<<"*************************  EVT_SAVEDEPTHMAP   EVT_SAVEDEPTHMAP EVT_SAVEDEPTHMAP************************\n";
-			
+			//std::cout<<"*************************  EVT_SAVEDEPTHMAP   EVT_SAVEDEPTHMAP EVT_SAVEDEPTHMAP************************\n";
+			//Executed 2nd
 			const EVTSaveDepthMap& evtImage = *((EVTSaveDepthMap*)(Event*)evt);
 			const IIndex idx = data.images[evtImage.idxImage];
 			DepthData& depthData(data.depthMaps.arrDepthData[idx]);
