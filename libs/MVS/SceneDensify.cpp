@@ -1921,13 +1921,13 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	
 	//data.depthMaps.arrDepthData[idx].depthmap
 	//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
-	for (IIndex idx: data.images) {
+	/*for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
 				const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
 				std::cout<<"started1.\n";
 				depthData.depthmap = 0;
 				std::cout<<"changed\n";
-	}
+	}*/
 	std::cout<<"***********************  Change started  *****************\n";
 	 //CodeChange by Jyothi
 	/*std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
