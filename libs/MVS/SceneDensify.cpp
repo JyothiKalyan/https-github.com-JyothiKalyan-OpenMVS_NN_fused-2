@@ -1926,7 +1926,8 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 		std::cout<<"started0.\n";
 				//const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
 				std::cout<<"started1.\n";
-				data.depthMaps.arrDepthData[idx].depthmap = {};
+				cout << typeof(data.depthMaps.arrDepthData[idx].depthmap) <<"\n";
+				//data.depthMaps.arrDepthData[idx].depthmap = {};
 				std::cout<<"changed\n";
 
 			/*	boost::pfr::for_each_field(x, [&ss](auto&& val) {
