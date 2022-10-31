@@ -1285,6 +1285,8 @@ bool DepthMapsData::FilterDepthMap(DepthData& depthDataRef, const IIndexArr& idx
 			}
 		}
 	}
+	std::cout<<"***************** "<<imageRef.GetID()<<"*********\n";
+
 	if (!SaveDepthMap(ComposeDepthFilePath(imageRef.GetID(), "filtered.dmap"), newDepthMap) ||
 		!SaveConfidenceMap(ComposeDepthFilePath(imageRef.GetID(), "filtered.cmap"), newConfMap))
 		return false;
@@ -1832,6 +1834,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 			pThread->join();
 	} else {
 		// single-thread execution
+		std::cout<<"Single Thread execution";
 		DenseReconstructionEstimate((void*)&data);
 	}
 	GET_LOGCONSOLE().Play();
@@ -1975,6 +1978,7 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			break; }
 
 		case EVT_ESTIMATEDEPTHMAP: {
+			std::cout<<"*************************  EVT_ESTIMATEDEPTHMAP   EVT_ESTIMATEDEPTHMAP EVT_ESTIMATEDEPTHMAP************************\n";
 			const EVTEstimateDepthMap& evtImage = *((EVTEstimateDepthMap*)(Event*)evt);
 			// request next image initialization to be performed while computing this depth-map
 			data.events.AddEvent(new EVTProcessImage((uint32_t)Thread::safeInc(data.idxImage)));
@@ -2008,6 +2012,8 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			break; }
 
 		case EVT_OPTIMIZEDEPTHMAP: {
+			std::cout<<"*************************  EVT_OPTIMIZEDEPTHMAP   EVT_OPTIMIZEDEPTHMAP EVT_OPTIMIZEDEPTHMAP************************\n";
+			
 			const EVTOptimizeDepthMap& evtImage = *((EVTOptimizeDepthMap*)(Event*)evt);
 			const IIndex idx = data.images[evtImage.idxImage];
 			DepthData& depthData(data.depthMaps.arrDepthData[idx]);
@@ -2034,6 +2040,8 @@ void Scene::DenseReconstructionEstimate(void* pData)
 			break; }
 
 		case EVT_SAVEDEPTHMAP: {
+			std::cout<<"*************************  EVT_SAVEDEPTHMAP   EVT_SAVEDEPTHMAP EVT_SAVEDEPTHMAP************************\n";
+			
 			const EVTSaveDepthMap& evtImage = *((EVTSaveDepthMap*)(Event*)evt);
 			const IIndex idx = data.images[evtImage.idxImage];
 			DepthData& depthData(data.depthMaps.arrDepthData[idx]);
