@@ -1206,7 +1206,8 @@ bool DepthMapsData::FilterDepthMap(DepthData& depthDataRef, const IIndexArr& idx
 				}
 			}
 		}
-	} else {
+	} 
+	else {
 		// remove depth if it does not agree with enough neighbors
 		const float thDepthDiffStrict(OPTDENSE::fDepthDiffThreshold*0.8f);
 		const unsigned nMinGoodViewsProc(75), nMinGoodViewsDeltaProc(65);
@@ -1285,8 +1286,7 @@ bool DepthMapsData::FilterDepthMap(DepthData& depthDataRef, const IIndexArr& idx
 			}
 		}
 	}
-	std::cout<<"*******@@@@@@@@@@@@@@@@@@@@@   ********** "<<imageRef.GetID()<<"**** @@@@@@@@@@@@@@@@@ *****\n";
-
+	
 	if (!SaveDepthMap(ComposeDepthFilePath(imageRef.GetID(), "filtered.dmap"), newDepthMap) ||
 		!SaveConfidenceMap(ComposeDepthFilePath(imageRef.GetID(), "filtered.cmap"), newConfMap))
 		return false;
@@ -1827,6 +1827,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	
 	if (nMaxThreads > 1) {
 		// multi-thread execution
+		std::cout<<"Multi Thread execution\n";
 		cList<SEACAVE::Thread> threads(2);
 		FOREACHPTR(pThread, threads)
 			pThread->start(DenseReconstructionEstimateTmp, (void*)&data);
@@ -1834,7 +1835,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 			pThread->join();
 	} else {
 		// single-thread execution
-		std::cout<<"Single Thread execution";
+		std::cout<<"Single Thread execution\n";
 		DenseReconstructionEstimate((void*)&data);
 	}
 	GET_LOGCONSOLE().Play();
@@ -1921,15 +1922,19 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	
 	//data.depthMaps.arrDepthData[idx].depthmap
 	//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
-	/*for (IIndex idx: data.images) {
+	for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
-				const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
+				//const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
 				std::cout<<"started1.\n";
-				depthData.depthmap = 0;
+				data.depthMaps.arrDepthData[idx].depthmap = {};
 				std::cout<<"changed\n";
-	}*/
+
+			/*	boost::pfr::for_each_field(x, [&ss](auto&& val) {
+				ss << val << ' '; });*/
+
+	}
 	std::cout<<"***********************  Change started  *****************\n";
-	 //CodeChange by Jyothi
+	//CodeChange by Jyothi
 	/*std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
 	std::cout<<"*************************one************************\n";
 	std::system("python3 //datasets//project//fuseAIDepth.py");
@@ -1937,7 +1942,6 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
 	*/
 std::cout<<"all changed code execution done";
-
 	return true;
 } // ComputeDepthMaps
 /*----------------------------------------------------------------*/
