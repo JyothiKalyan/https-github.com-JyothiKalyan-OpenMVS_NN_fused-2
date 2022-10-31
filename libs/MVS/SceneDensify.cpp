@@ -1871,6 +1871,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 					pThread->join();
 			} else {
 				// single-thread execution
+				std::cout<<"Single Thread execution";
 				DenseReconstructionEstimate((void*)&data);
 			}
 			GET_LOGCONSOLE().Play();
