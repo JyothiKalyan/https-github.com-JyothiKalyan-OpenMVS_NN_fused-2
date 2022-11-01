@@ -1926,8 +1926,8 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
 				const Image8U::Size sizeMap(depthData.depthMap.size());
-				std::cout<< <sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  ";
-				//std::cout<<typeof(depthData.depthMap)<<"\n";
+				std::cout<< sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  ";
+				//depthData.depthMap(y,x) = d;
 				//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
 				std::cout<<rawName<<"\n";
 	
