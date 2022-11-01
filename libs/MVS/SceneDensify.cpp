@@ -1917,12 +1917,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 			return false;
 		data.progress.Release();
 	}
-	//data.
-	//const IIndex idx = data.images[evtImage.idxImage];
-	
-	//data.depthMaps.arrDepthData[idx].depthmap
-	//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
-	
+
 	
 	for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
@@ -1930,6 +1925,8 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				std::cout<<typeof(depthData.depthMap)<<"\n";
+				//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
 				std::cout<<rawName<<"\n";
 	
 	}
