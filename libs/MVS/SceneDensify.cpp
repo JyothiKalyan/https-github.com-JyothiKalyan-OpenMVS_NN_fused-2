@@ -1922,11 +1922,13 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	
 	//data.depthMaps.arrDepthData[idx].depthmap
 	//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
+	
+	
 	for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
 				//const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
 				std::cout<<"started1.\n";
-				//cout << typeof(data.depthMaps.arrDepthData[idx].depthmap) <<"\n";
+				cout << typeof(data.depthMaps.arrDepthData[idx].depthmap) <<"\n";
 				//data.depthMaps.arrDepthData[idx].depthmap = {};
 				std::cout<<"changed\n";
 
