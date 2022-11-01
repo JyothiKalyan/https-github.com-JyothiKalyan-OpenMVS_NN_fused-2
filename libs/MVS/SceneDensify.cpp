@@ -1211,6 +1211,12 @@ bool DepthMapsData::FilterDepthMap(DepthData& depthDataRef, const IIndexArr& idx
 		// remove depth if it does not agree with enough neighbors
 		const float thDepthDiffStrict(OPTDENSE::fDepthDiffThreshold*0.8f);
 		const unsigned nMinGoodViewsProc(75), nMinGoodViewsDeltaProc(65);
+		//@Changes By Jyothi
+		//const float thDepthDiffStrict(OPTDENSE::fDepthDiffThreshold*0.8f);
+		//const float thDepthDiffStrict(OPTDENSE::fDepthDiffThreshold*0.7f);
+		//const unsigned nMinGoodViewsProc(75), nMinGoodViewsDeltaProc(65);
+		//@Changes By Jyothi
+
 		const unsigned nDeltas(4);
 		const unsigned nMinViewsDelta(nMinViews*(nDeltas-2));
 		const ImageRef xDs[nDeltas] = { ImageRef(-1,0), ImageRef(1,0), ImageRef(0,-1), ImageRef(0,1) };
@@ -1902,6 +1908,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 		GET_LOGCONSOLE().Pause();
 		if (nMaxThreads > 1) {
 			// multi-thread execution
+			std::cout<<"Multi Thread execution";
 			cList<SEACAVE::Thread> threads(MINF(nMaxThreads, (unsigned)data.images.GetSize()));
 			FOREACHPTR(pThread, threads)
 				pThread->start(DenseReconstructionFilterTmp, (void*)&data);
@@ -1926,8 +1933,17 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
 				const Image8U::Size sizeMap(depthData.depthMap.size());
-				std::cout<< sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  ";
-				//depthData.depthMap(y,x) = d;
+
+				 std::cout <<"rows:  " << depthData.depthMap.rows <<"cols :" << depthData.depthMap.cols;
+
+
+				std::cout<< "height: " << sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  width:"<<sizeMap.width;
+					for (int i=0; i<sizeMap.height; ++i) {
+			for (int j=0; j<sizeMap.width; ++j) {
+				std::cout<<i<<"***"<<j<<"\n";
+				
+						}}
+				//
 				//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
 				std::cout<<rawName<<"\n";
 	
