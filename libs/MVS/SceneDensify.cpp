@@ -1926,15 +1926,12 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	
 	for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
-				//const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
-				std::cout<<"started1.\n";
-				cout << typeof(data.depthMaps) <<"\n";
-				//data.depthMaps.arrDepthData[idx].depthmap = {};
-				std::cout<<"changed\n";
-
-			/*	boost::pfr::for_each_field(x, [&ss](auto&& val) {
-				ss << val << ' '; });*/
-
+			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
+				if (!depthData.IsValid())
+					continue;
+				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				std::cout<<rawName<<"\n";
+	
 	}
 	std::cout<<"***********************  Change started  *****************\n";
 	//CodeChange by Jyothi
