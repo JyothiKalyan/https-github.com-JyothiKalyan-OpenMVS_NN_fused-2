@@ -1928,7 +1928,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 		std::cout<<"started0.\n";
 				//const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
 				std::cout<<"started1.\n";
-				cout << typeof(data.depthMaps.arrDepthData[idx].depthmap) <<"\n";
+				cout << typeof(data.depthMaps) <<"\n";
 				//data.depthMaps.arrDepthData[idx].depthmap = {};
 				std::cout<<"changed\n";
 
