@@ -1936,7 +1936,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 
 				 std::cout <<"rows:  " << depthData.depthMap.rows <<"cols :" << depthData.depthMap.cols;
 
-
+				std::cout << depthData.dMin <<"     "<<depthData.dMax ;
 				std::cout<< "height: " << sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  width:"<<sizeMap.width;
 					for (int i=0; i<sizeMap.height; ++i) {
 			for (int j=0; j<sizeMap.width; ++j) {
