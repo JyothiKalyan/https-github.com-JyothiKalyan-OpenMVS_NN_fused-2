@@ -1848,7 +1848,32 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	if (!data.events.IsEmpty())
 		return false;
 	data.progress.Release();
-  
+
+for (IIndex idx: data.images) {
+		std::cout<<"started0.\n";
+			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
+				if (!depthData.IsValid())
+					continue;
+				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				const Image8U::Size sizeMap(depthData.depthMap.size());
+
+				 std::cout <<"rows:  " << depthData.depthMap.rows <<"cols :" << depthData.depthMap.cols;
+std::cout<<sizeof(depthData);
+				std::cout << depthData.dMin <<"     "<<depthData.dMax ;
+				std::cout<< "height: " << sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  width:"<<sizeMap.width;
+					for (int i=0; i<sizeMap.height; ++i) {
+			for (int j=0; j<sizeMap.width; ++j) {
+				std::cout<<i<<"***"<<j<<"\n";
+				
+						}}
+				//
+				//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
+				std::cout<<rawName<<"\n";
+	
+	}
+	std::cout<<"***********************  Change started  *****************\n";
+	
+	  
 	if (data.nFusionMode >= 0) {
 		#ifdef _USE_CUDA
 		// initialize CUDA
@@ -1926,29 +1951,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	}
 
 	
-	for (IIndex idx: data.images) {
-		std::cout<<"started0.\n";
-			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
-				if (!depthData.IsValid())
-					continue;
-				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
-				const Image8U::Size sizeMap(depthData.depthMap.size());
-
-				 std::cout <<"rows:  " << depthData.depthMap.rows <<"cols :" << depthData.depthMap.cols;
-
-				std::cout << depthData.dMin <<"     "<<depthData.dMax ;
-				std::cout<< "height: " << sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  width:"<<sizeMap.width;
-					for (int i=0; i<sizeMap.height; ++i) {
-			for (int j=0; j<sizeMap.width; ++j) {
-				std::cout<<i<<"***"<<j<<"\n";
-				
-						}}
-				//
-				//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
-				std::cout<<rawName<<"\n";
 	
-	}
-	std::cout<<"***********************  Change started  *****************\n";
 	//CodeChange by Jyothi
 	/*std::system("//datasets//project//readdmapfile_final \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'");
 	std::cout<<"*************************one************************\n";

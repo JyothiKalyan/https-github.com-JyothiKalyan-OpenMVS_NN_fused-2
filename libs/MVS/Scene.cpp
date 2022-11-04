@@ -982,6 +982,9 @@ unsigned Scene::Split(ImagesChunkArr& chunks, float maxArea, int depthMapStep) c
 			if (depthData.IsEmpty())
 				continue;
 			const IIndex numPointsBegin(visibility.size());
+			//Change by Jyothi
+			std::cout<<sizeof(depthData);
+			//---------- 
 			const Camera camera(imageData.GetCamera(platforms, depthData.depthMap.size()));
 			for (int r=(depthData.depthMap.rows%depthMapStep)/2; r<depthData.depthMap.rows; r+=depthMapStep) {
 				for (int c=(depthData.depthMap.cols%depthMapStep)/2; c<depthData.depthMap.cols; c+=depthMapStep) {
