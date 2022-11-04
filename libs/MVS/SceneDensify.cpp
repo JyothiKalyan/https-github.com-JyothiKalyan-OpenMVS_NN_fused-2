@@ -1936,8 +1936,6 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	std::cout<<"*************************two************************\n";
 	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
 	*/
-int maxrand = 100;
-int minrand = 2;
 for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
 			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
@@ -1948,15 +1946,34 @@ for (IIndex idx: data.images) {
 				depthData_loaded.Load(rawName, 1);
 				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
 				std::cout<<sizeMap.height <<"    "<<sizeMap.width<<"\n";
+				std::cout<<rawName<<"\n";
+				//depth_file_name = "";
+				//ifstream data(depth_file_name);
+				/*int i = 0;
+				    while(getline(data,line))
+					{
+						int j = 0;
+						stringstream lineStream(line);
+						string cell;
+						vector<std::string> parsedRow;
+						while(getline(lineStream,cell,',')){ 
+							 depthData.depthMap(i,j) = cell;
+							 j = j+1;
+						}
+						i = i+1;
+						
+					}*/
+
+
 					for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							 depthData.depthMap(i,j) = rand()%(maxrand-minrand + 1) + minrand;
+							 depthData_loaded.depthMap(i,j) = 10;
 							//std::cout<<i<<"***"<<j<<"\n";
-				}}
+					}}
 				
 
 				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
-				std::cout<<rawName<<"\n";
+				
 	
 	}
 	std::cout<<"***********************  Change started  *****************\n";
