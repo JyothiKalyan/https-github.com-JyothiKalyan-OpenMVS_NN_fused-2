@@ -1855,6 +1855,7 @@ for (IIndex idx: data.images) {
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				std::cout << sizeof(depthData.depthMap)<<"   &&&&&&&&&\n";
 				const Image8U::Size sizeMap(depthData.depthMap.size());
 
 				 std::cout <<"rows:  " << depthData.depthMap.rows <<"cols :" << depthData.depthMap.cols;
@@ -1872,8 +1873,8 @@ std::cout<<sizeof(depthData);
 	
 	}
 	std::cout<<"***********************  Change started  *****************\n";
-	
-	  
+
+
 	if (data.nFusionMode >= 0) {
 		#ifdef _USE_CUDA
 		// initialize CUDA
@@ -1913,6 +1914,7 @@ std::cout<<sizeof(depthData);
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				std::cout << sizeof(depthData.depthMap)<<"   ^^^^^^^^^^^^^^^^n";
 				File::deleteFile(rawName);
 				File::renameFile(ComposeDepthFilePath(depthData.GetView().GetID(), "geo.dmap"), rawName);
 			}
