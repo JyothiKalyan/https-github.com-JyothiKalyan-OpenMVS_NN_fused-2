@@ -1861,7 +1861,7 @@ for (IIndex idx: data.images) {
 				 std::cout <<"rows:  " << depthData.depthMap.rows <<"cols :" << depthData.depthMap.cols;
 std::cout<<sizeof(depthData);
 				std::cout << depthData.dMin <<"     "<<depthData.dMax ;
-				std::cout<< "height: " << sizeMap.height <<" &&&&&&&&&&&&&&&&&&&  width:"<<sizeMap.width;
+				std::cout<< "height: " << sizeMap.height <<"  width:"<<sizeMap.width;
 					for (int i=0; i<sizeMap.height; ++i) {
 			for (int j=0; j<sizeMap.width; ++j) {
 				std::cout<<i<<"***"<<j<<"\n";
@@ -1914,7 +1914,7 @@ std::cout<<sizeof(depthData);
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
-				std::cout << sizeof(depthData.depthMap)<<"   ^^^^^^^^^^^^^^^^n";
+				std::cout << sizeof(depthData.depthMap)<<"   ^^^^^^^^^^^^^^^^\n";
 				File::deleteFile(rawName);
 				File::renameFile(ComposeDepthFilePath(depthData.GetView().GetID(), "geo.dmap"), rawName);
 			}
