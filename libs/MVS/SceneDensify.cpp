@@ -1890,7 +1890,6 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
-				std::cout << sizeof(depthData.depthMap)<<"   ^^^^^^^^^^^^^^^^\n";
 				File::deleteFile(rawName);
 				File::renameFile(ComposeDepthFilePath(depthData.GetView().GetID(), "geo.dmap"), rawName);
 			}
@@ -1937,6 +1936,8 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	std::cout<<"*************************two************************\n";
 	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
 	*/
+int maxrand = 100;
+int minrand = 2;
 for (IIndex idx: data.images) {
 		std::cout<<"started0.\n";
 			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
@@ -1947,10 +1948,11 @@ for (IIndex idx: data.images) {
 				depthData_loaded.Load(rawName, 1);
 				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
 				std::cout<<sizeMap.height <<"    "<<sizeMap.width<<"\n";
-				/*	for (int i=0; i<sizeMap.height; ++i) {
+					for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							std::cout<<i<<"***"<<j<<"\n";
-				}}*/
+							 depthData.depthMap(i,j) = rand()%(maxrand-minrand + 1) + minrand;
+							//std::cout<<i<<"***"<<j<<"\n";
+				}}
 				
 
 				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
