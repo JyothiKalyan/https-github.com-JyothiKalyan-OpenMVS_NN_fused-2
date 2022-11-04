@@ -1858,18 +1858,14 @@ for (IIndex idx: data.images) {
 				DepthData depthData_loaded;
 				depthData_loaded.Load(rawName, 1);
 				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
-
-				 std::cout <<"rows:  " << depthData_loaded.depthMap.rows <<"cols :" << depthData_loaded.depthMap.cols;
-std::cout<<"depthaData:  "<<sizeof(depthData) << "  depthData_loaded:  "<<sizeof(depthData_loaded);
-				/*std::cout << "dMin:  "<<depthData.dMin <<"     dMax:"<<depthData.dMax ;
-				std::cout<< "height: " << sizeMap.height <<"  width:"<<sizeMap.width;
-					for (int i=0; i<sizeMap.height; ++i) {
-			for (int j=0; j<sizeMap.width; ++j) {
-				std::cout<<i<<"***"<<j<<"\n";}}*/
+				
+				/*	for (int i=0; i<sizeMap.height; ++i) {
+						for (int j=0; j<sizeMap.width; ++j) {
+							std::cout<<i<<"***"<<j<<"\n";
+				}}*/
 				
 
-				//
-				//depthData.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
+				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
 				std::cout<<rawName<<"\n";
 	
 	}
