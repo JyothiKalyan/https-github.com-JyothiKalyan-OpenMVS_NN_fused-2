@@ -1890,6 +1890,7 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				std::cout << sizeof(depthData.depthMap)<<"   ^^^^^^^^^^^^^^^^\n";
 				File::deleteFile(rawName);
 				File::renameFile(ComposeDepthFilePath(depthData.GetView().GetID(), "geo.dmap"), rawName);
 			}
@@ -1945,38 +1946,15 @@ for (IIndex idx: data.images) {
 				DepthData depthData_loaded;
 				depthData_loaded.Load(rawName, 1);
 				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
-				std::cout<<sizeMap.height <<"    "<<sizeMap.width<<"\n";
-				std::cout<<rawName<<"\n";
-				//depth_file_name = "";
-				//ifstream data(depth_file_name);
-				/*int i = 0;
-				    while(getline(data,line))
-					{
-						int j = 0;
-						stringstream lineStream(line);
-						string cell;
-						vector<std::string> parsedRow;
-						while(getline(lineStream,cell,',')){ 
-							 depthData.depthMap(i,j) = cell;
-							 j = j+1;
-						}
-						i = i+1;
-						
-					}*/
-
-
-					/*for (int i=0; i<sizeMap.height; ++i) {
+				std::cout<<sizeMap.height <<"  width:"<<sizeMap.width;
+				/*	for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							std::cout<<depthData_loaded.depthMap(i,j)<<" ";
-							//Error line below
-							// depthData_loaded.depthMap(i,j) = 0.0;
-							//std::cout<<i<<"***"<<j<<"\n";
-					}}*/
-					
+							std::cout<<i<<"***"<<j<<"\n";
+				}}*/
 				
 
-				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
-				
+				//depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
+				std::cout<<rawName<<"\n";
 	
 	}
 	std::cout<<"***********************  Change started  *****************\n";
