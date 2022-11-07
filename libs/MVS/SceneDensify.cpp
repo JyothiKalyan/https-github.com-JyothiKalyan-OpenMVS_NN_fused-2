@@ -1849,6 +1849,27 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 		return false;
 	data.progress.Release();
 
+for (IIndex idx: data.images) {
+		std::cout<<"started0.\n";
+			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
+				if (!depthData.IsValid())
+					continue;
+				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				DepthData depthData_loaded;
+				depthData_loaded.Load(rawName, 1);
+				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
+				
+				/*	for (int i=0; i<sizeMap.height; ++i) {
+						for (int j=0; j<sizeMap.width; ++j) {
+							std::cout<<i<<"***"<<j<<"\n";
+				}}*/
+				
+
+				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
+				std::cout<<"saved!!!!!!"<<rawName<<"\n";
+	
+	}
+	std::cout<<"***********************  Change started  *****************\n";
 
 
 	if (data.nFusionMode >= 0) {
@@ -1937,29 +1958,6 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	std::cout<<"*************************two************************\n";
 	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
 	*/
-for (IIndex idx: data.images) {
-		std::cout<<"started0.\n";
-			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
-				if (!depthData.IsValid())
-					continue;
-				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
-				DepthData depthData_loaded;
-				depthData_loaded.Load(rawName, 1);
-				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
-				std::cout<<sizeMap.height <<"  width:"<<sizeMap.width;
-				/*	for (int i=0; i<sizeMap.height; ++i) {
-						for (int j=0; j<sizeMap.width; ++j) {
-							std::cout<<i<<"***"<<j<<"\n";
-				}}*/
-				
-
-				//depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
-				std::cout<<rawName<<"\n";
-	
-	}
-	std::cout<<"***********************  Change started  *****************\n";
-
-
 std::cout<<"all changed code execution done";
 	return true;
 } // ComputeDepthMaps
