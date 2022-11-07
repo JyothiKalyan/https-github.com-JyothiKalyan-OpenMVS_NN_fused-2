@@ -1833,7 +1833,6 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 	
 	if (nMaxThreads > 1) {
 		// multi-thread execution
-		std::cout<<"Multi Thread execution\n";
 		cList<SEACAVE::Thread> threads(2);
 		FOREACHPTR(pThread, threads)
 			pThread->start(DenseReconstructionEstimateTmp, (void*)&data);
@@ -1841,35 +1840,12 @@ bool Scene::ComputeDepthMaps(DenseDepthMapData& data)
 			pThread->join();
 	} else {
 		// single-thread execution
-		std::cout<<"Single Thread execution\n";
 		DenseReconstructionEstimate((void*)&data);
 	}
 	GET_LOGCONSOLE().Play();
 	if (!data.events.IsEmpty())
 		return false;
 	data.progress.Release();
-
-for (IIndex idx: data.images) {
-		std::cout<<"started0.\n";
-			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
-				if (!depthData.IsValid())
-					continue;
-				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
-				DepthData depthData_loaded;
-				depthData_loaded.Load(rawName, 1);
-				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
-				
-				/*	for (int i=0; i<sizeMap.height; ++i) {
-						for (int j=0; j<sizeMap.width; ++j) {
-							std::cout<<i<<"***"<<j<<"\n";
-				}}*/
-				
-
-				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
-				std::cout<<"saved!!!!!!"<<rawName<<"\n";
-	
-	}
-	std::cout<<"***********************  Change started  *****************\n";
 
 
 	if (data.nFusionMode >= 0) {
@@ -1911,7 +1887,6 @@ for (IIndex idx: data.images) {
 				if (!depthData.IsValid())
 					continue;
 				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
-				std::cout << sizeof(depthData.depthMap)<<"   ^^^^^^^^^^^^^^^^\n";
 				File::deleteFile(rawName);
 				File::renameFile(ComposeDepthFilePath(depthData.GetView().GetID(), "geo.dmap"), rawName);
 			}
@@ -1932,7 +1907,6 @@ for (IIndex idx: data.images) {
 		GET_LOGCONSOLE().Pause();
 		if (nMaxThreads > 1) {
 			// multi-thread execution
-			std::cout<<"Multi Thread execution";
 			cList<SEACAVE::Thread> threads(MINF(nMaxThreads, (unsigned)data.images.GetSize()));
 			FOREACHPTR(pThread, threads)
 				pThread->start(DenseReconstructionFilterTmp, (void*)&data);
@@ -1940,7 +1914,7 @@ for (IIndex idx: data.images) {
 				pThread->join();
 		} else {
 			// single-thread execution
-			std::cout<<"Single Thread execution";
+			
 			DenseReconstructionFilter((void*)&data);
 		}
 		GET_LOGCONSOLE().Play();
@@ -1958,6 +1932,31 @@ for (IIndex idx: data.images) {
 	std::cout<<"*************************two************************\n";
 	std::system("//datasets//project//saveexcelasdmap \'//datasets//project//opensfm//undistorted//openmvs//depthmaps_csv\'  \'//datasets//project//opensfm//undistorted//openmvs//depthmaps\' \'//datasets//project//corrected_depthmaps_csv\'");
 	*/
+
+
+for (IIndex idx: data.images) {
+		std::cout<<"started0.\n";
+			const DepthData& depthData(data.depthMaps.arrDepthData[idx]);
+				if (!depthData.IsValid())
+					continue;
+				const String rawName(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap"));
+				DepthData depthData_loaded;
+				depthData_loaded.Load(rawName, 1);
+				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
+				
+				/*	for (int i=0; i<sizeMap.height; ++i) {
+						for (int j=0; j<sizeMap.width; ++j) {
+							std::cout<<i<<"***"<<j<<"\n";
+				}}*/
+				
+
+				//depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
+				std::cout<<"saved!!!!!!"<<rawName<<"\n";
+	
+	}
+	std::cout<<"***********************  Change started  *****************\n";
+
+
 std::cout<<"all changed code execution done";
 	return true;
 } // ComputeDepthMaps
