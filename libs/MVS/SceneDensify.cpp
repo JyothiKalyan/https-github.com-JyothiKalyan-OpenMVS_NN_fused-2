@@ -1965,12 +1965,14 @@ for (IIndex idx: data.images) {
 					}*/
 
 
-					for (int i=0; i<sizeMap.height; ++i) {
+					/*for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							//std::cout<<depthData_loaded.depthMap(i,j)<<" ";
+							std::cout<<depthData_loaded.depthMap(i,j)<<" ";
+							//Error line below
 							// depthData_loaded.depthMap(i,j) = 0.0;
 							//std::cout<<i<<"***"<<j<<"\n";
-					}}
+					}}*/
+					
 				
 
 				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), "dmap" ));
