@@ -1944,13 +1944,14 @@ for (IIndex idx: data.images) {
 				depthData_loaded.Load(rawName, 1);
 				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
 				
-				/*	for (int i=0; i<sizeMap.height; ++i) {
+					for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							std::cout<<i<<"***"<<j<<"\n";
-				}}*/
+							std::cout<<depthData_loaded.depthMap(i,j)<<" ";
+							//std::cout<<i<<"***"<<j<<"\n";
+				}}
 				
 
-				//depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
+				depthData_loaded.Save(ComposeDepthFilePath(depthData.GetView().GetID(), data.nEstimationGeometricIter < 0 ? "dmap" : "geo.dmap"));
 				std::cout<<"saved!!!!!!"<<rawName<<"\n";
 	
 	}
