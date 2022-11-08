@@ -1946,7 +1946,7 @@ for (IIndex idx: data.images) {
 				//const Depth depth = 5.0;
 					for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							depthData_loaded.depthMap(i,j) = 5.2 ;
+							//depthData_loaded.depthMap(i,j) = 5.2 ;
 							//std::cout<<depthData_loaded.depthMap(i,j)<<" ";
 							//std::cout<<i<<"***"<<j<<"\n";
 				}}
