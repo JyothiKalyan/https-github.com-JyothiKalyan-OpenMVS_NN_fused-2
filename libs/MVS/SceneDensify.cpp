@@ -1943,10 +1943,10 @@ for (IIndex idx: data.images) {
 				DepthData depthData_loaded;
 				depthData_loaded.Load(rawName, 1);
 				const Image8U::Size sizeMap(depthData_loaded.depthMap.size());
-				const Depth depth = 5.0;
+				//const Depth depth = 5.0;
 					for (int i=0; i<sizeMap.height; ++i) {
 						for (int j=0; j<sizeMap.width; ++j) {
-							depthData_loaded.depthMap(i,j) = depth ;
+							depthData_loaded.depthMap(i,j) = 5.2 ;
 							//std::cout<<depthData_loaded.depthMap(i,j)<<" ";
 							//std::cout<<i<<"***"<<j<<"\n";
 				}}
